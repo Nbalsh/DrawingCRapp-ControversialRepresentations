@@ -20,14 +20,14 @@ import android.widget.Toast;
 
 public class DrawingActivity extends Activity implements OnClickListener{
 
-	private ImageView currPaint, drawBtn;
+	private ImageView currPaint, drawBtn; //should be ImageButton?
 	private int paintColor;
 	private DrawingView drawView;
 	private DrawingActivity drawPaint; 
 	
 	private float smallBrush, mediumBrush, largeBrush;
 	
-	private ImageButton eraseBtn;
+	private ImageButton eraseBtn, newBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,10 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		
 		eraseBtn = (ImageButton) findViewById(R.id.erase_btn);
 		eraseBtn.setOnClickListener(this);
+		
+		newBtn = (ImageButton)findViewById(R.id.new_btn);
+		newBtn.setOnClickListener(this);
+		
 	}
 	
 	public void paintClicked(View view){
@@ -138,6 +142,25 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			    }
 			});
 			brushDialog.show();
+		}
+		
+		else if(view.getId()==R.id.new_btn){
+		    //new button
+			AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
+			newDialog.setTitle("New drawing");
+			newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
+			newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+			    public void onClick(DialogInterface dialog, int which){
+			        drawView.startNew();
+			        dialog.dismiss();
+			    }
+			});
+			newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+			    public void onClick(DialogInterface dialog, int which){
+			        dialog.cancel();
+			    }
+			});
+			newDialog.show();
 		}
 		
 	}
