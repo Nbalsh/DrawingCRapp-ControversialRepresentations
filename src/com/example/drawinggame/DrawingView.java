@@ -85,6 +85,7 @@ public class DrawingView extends View {
 		    drawPath.lineTo(touchX, touchY);
 		    break;
 		case MotionEvent.ACTION_UP:
+			drawCanvas.drawPoint(touchX, touchY, drawPaint);
 		    drawCanvas.drawPath(drawPath, drawPaint);
 		    drawPath.reset();
 		    break;
