@@ -47,16 +47,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int draw_btn=0x7f090001;
         public static final int drawing=0x7f090004;
-        public static final int dummy_button2=0x7f090009;
         public static final int erase_btn=0x7f090002;
         public static final int fullscreen_content=0x7f090006;
         public static final int fullscreen_content_controls=0x7f090007;
-        public static final int large_brush=0x7f09000c;
-        public static final int medium_brush=0x7f09000b;
+        public static final int gallery=0x7f09000a;
+        public static final int large_brush=0x7f09000e;
+        public static final int medium_brush=0x7f09000d;
         public static final int new_btn=0x7f090000;
         public static final int paint_colors=0x7f090005;
+        public static final int past_games=0x7f090009;
+        public static final int picture=0x7f09000b;
         public static final int save_btn=0x7f090003;
-        public static final int small_brush=0x7f09000a;
+        public static final int small_brush=0x7f09000c;
         public static final int start_game=0x7f090008;
     }
     public static final class integer {
@@ -67,7 +69,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class layout {
         public static final int activity_drawing=0x7f030000;
         public static final int activity_fullscreen=0x7f030001;
-        public static final int brush_chooser=0x7f030002;
+        public static final int activity_gallery=0x7f030002;
+        public static final int brush_chooser=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f070000;
@@ -78,7 +81,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lrg=0x7f07000a;
         public static final int med=0x7f070009;
         public static final int paint=0x7f070006;
+        public static final int picture=0x7f07000c;
         public static final int save=0x7f070007;
+        public static final int saved_filed_name=0x7f07000b;
+        public static final int select_intro=0x7f07000d;
+        public static final int show_intro=0x7f07000e;
         public static final int sml=0x7f070008;
         public static final int start_new=0x7f070003;
     }
@@ -158,5 +165,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.example.drawinggame:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
+        /** Attributes that can be used with a PicGallery.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PicGallery_android_galleryItemBackground android:galleryItemBackground}</code></td><td></td></tr>
+           </table>
+           @see #PicGallery_android_galleryItemBackground
+         */
+        public static final int[] PicGallery = {
+            0x0101004c
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#galleryItemBackground}
+          attribute's value can be found in the {@link #PicGallery} array.
+          @attr name android:galleryItemBackground
+        */
+        public static final int PicGallery_android_galleryItemBackground = 0;
     };
 }

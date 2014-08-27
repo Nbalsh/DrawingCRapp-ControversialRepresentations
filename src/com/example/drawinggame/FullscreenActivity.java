@@ -56,6 +56,8 @@ public class FullscreenActivity extends Activity {
 	 */
 	private SystemUiHider mSystemUiHider;
 
+	private Button mPastGames;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,10 +79,16 @@ public class FullscreenActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				startDrawingActivity();
-				
 			}
+		});
+		
+		mPastGames = (Button) findViewById(R.id.past_games);
+		mPastGames.setOnClickListener(new OnClickListener(){
 			
-			
+			@Override
+			public void onClick(View v2) {
+				startGalleryActivity();
+			}
 		});
 
 		// Set up an instance of SystemUiHider to control the system UI for
@@ -201,5 +209,10 @@ public class FullscreenActivity extends Activity {
 		startActivity(i);
 	}
 	
+	private void startGalleryActivity() {
+		Intent i2 = new Intent(this, GalleryActivity.class);
+		startActivity(i2);
+		
+	}
 
 }

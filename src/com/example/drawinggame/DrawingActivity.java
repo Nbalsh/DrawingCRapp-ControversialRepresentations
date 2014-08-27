@@ -17,6 +17,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.view.View.OnClickListener;
@@ -207,6 +208,15 @@ public class DrawingActivity extends Activity implements OnClickListener{
 				boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.flush();
 				fos.close();
+				
+				//trying crap from: http://developer.android.com/training/basics/data-storage/shared-preferences.html
+				
+				SharedPreferences sharedPref = DrawingActivity.this.getPreferences(Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPref.edit();
+				editor.putString(getString(R.string.saved_filed_name), pictureFile.getPath());
+				editor.commit();
+				
+				
 				Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
 				Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
@@ -234,13 +244,10 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		}
 
 	}
-
 	
 	@Override
 	public void onBackPressed()
 	{
-	     // code here to show dialog
-		
 		AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
 		saveDialog.setTitle("Exit Current Game");
 		saveDialog.setMessage("Exit Current Game Fo Reals?");
@@ -255,7 +262,6 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			}
 		});
 		saveDialog.show();
-		
 	}
 
 }
