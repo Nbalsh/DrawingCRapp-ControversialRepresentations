@@ -27,6 +27,7 @@ public class DrawingView extends View {
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
+		setupDrawing();
 	}
 	
 	private void setupDrawing(){

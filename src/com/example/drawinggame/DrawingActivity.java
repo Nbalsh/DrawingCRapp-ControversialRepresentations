@@ -5,12 +5,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
 public class DrawingActivity extends Activity{
 
-	private View currPaint;
+	private ImageView currPaint;
 	private int paintColor;
 	private DrawingView drawView;
 	private DrawingActivity drawPaint;
@@ -26,7 +27,7 @@ public class DrawingActivity extends Activity{
 		LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
 		currPaint = (ImageButton)paintLayout.getChildAt(0);
 		currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-	
+		
 	}
 	
 	public void paintClicked(View view){
