@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:text="Start" />
             <Button
-                android:id="@+id/dummy_button2"
+                android:id="@+id/past_games"
                 style="?buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

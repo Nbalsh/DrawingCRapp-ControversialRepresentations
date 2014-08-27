@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 public class FullscreenActivity extends Activity {
 	// UI fields
 	Button mStart;
+	Button mPastGames;
 	
 	// this is for the drawing
 
@@ -68,6 +69,7 @@ public class FullscreenActivity extends Activity {
 		setContentView(R.layout.activity_fullscreen);
 		
 		mStart = (Button) findViewById(R.id.start_game);
+		mPastGames = (Button) findViewById(R.id.past_games);
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -81,6 +83,14 @@ public class FullscreenActivity extends Activity {
 			}
 			
 			
+		});
+		
+		mPastGames.setOnClickListener(new OnClickListener(){
+			
+			@Override
+			public void onClick(View v2) {
+				startGalleryActivity();
+			}
 		});
 
 		// Set up an instance of SystemUiHider to control the system UI for
@@ -146,6 +156,9 @@ public class FullscreenActivity extends Activity {
 		findViewById(R.id.start_game).setOnTouchListener(
 				mDelayHideTouchListener);
 		
+		findViewById(R.id.past_games).setOnTouchListener(
+				mDelayHideTouchListener);
+		
 		// THIS IS WHERE I ADD
 
 	}
@@ -201,5 +214,10 @@ public class FullscreenActivity extends Activity {
 		startActivity(i);
 	}
 	
+	private void startGalleryActivity() {
+		Intent i2 = new Intent(this, GalleryActivity.class);
+		startActivity(i2);
+		
+	}
 
 }
