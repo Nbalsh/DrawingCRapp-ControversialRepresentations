@@ -203,7 +203,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			File pictureFile = new File(file.getPath(), UUID.randomUUID().toString()+".png");
 			
 			try {
-				FileOutputStream fos = new FileOutputStream(pictureFile, Context.mode);
+				FileOutputStream fos = new FileOutputStream(pictureFile);
 				boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.flush();
 				fos.close();
