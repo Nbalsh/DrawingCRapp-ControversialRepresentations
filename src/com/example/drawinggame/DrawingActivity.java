@@ -235,5 +235,27 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 	}
 
+	
+	@Override
+	public void onBackPressed()
+	{
+	     // code here to show dialog
+		
+		AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
+		saveDialog.setTitle("Exit Current Game");
+		saveDialog.setMessage("Exit Current Game Fo Reals?");
+		saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				DrawingActivity.this.finish();
+			}
+		});
+		saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				dialog.cancel();
+			}
+		});
+		saveDialog.show();
+		
+	}
 
 }
