@@ -8,11 +8,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.UUID;
 import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -28,6 +33,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	private float smallBrush, mediumBrush, largeBrush;
 
 	private ImageButton eraseBtn, newBtn, saveBtn;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 	public void paintClicked(View view){
 		if(view!=currPaint){
+			drawView.setErase(false);
 			ImageButton imgView = (ImageButton)view;
 			String color = view.getTag().toString();
 			drawView.setColor(color);
@@ -76,6 +83,8 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			final Dialog brushDialog = new Dialog(this);
 			brushDialog.setTitle("Brush size:");
 			brushDialog.setContentView(R.layout.brush_chooser);
+
+			drawView.setErase(false);
 
 			ImageButton smallBtn = (ImageButton)brushDialog.findViewById(R.id.small_brush);
 			smallBtn.setOnClickListener(new OnClickListener(){
@@ -106,7 +115,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 					drawView.setLastBrushSize(largeBrush);
 					brushDialog.dismiss();
 				}
-			});
+			}); 	
 
 			brushDialog.show();
 		}
@@ -182,20 +191,45 @@ public class DrawingActivity extends Activity implements OnClickListener{
 				}
 			});
 			saveDialog.show();
+			//Toast.makeText(getApplicationContext(), "test1", Toast.LENGTH_SHORT).show();
 			drawView.setDrawingCacheEnabled(true);
-			String imgSaved = MediaStore.Images.Media.insertImage(
+
+			File file = new File(DrawingActivity.this.getFilesDir(), "DrawingCRApp2");
+			if(!file.exists()){
+				file.mkdirs();
+				
+			}
+			//Toast.makeText(getApplicationContext(), "test2", Toast.LENGTH_SHORT).show();
+			File pictureFile = new File(file.getPath(), UUID.randomUUID().toString()+".png");
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(pictureFile);
+				boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
+				fos.flush();
+				fos.close();
+				Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {
+				e.printStackTrace();
+				Toast.makeText(getApplicationContext(), "file not created", Toast.LENGTH_SHORT).show();
+			}
+			
+
+
+			/*String imgSaved = MediaStore.Images.Media.insertImage(
 					getContentResolver(), drawView.getDrawingCache(),
 					UUID.randomUUID().toString()+".png", "drawing");
 			if(imgSaved!=null){
-			    Toast savedToast = Toast.makeText(getApplicationContext(), 
-			        "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
-			    savedToast.show();
+				Toast savedToast = Toast.makeText(getApplicationContext(), 
+						"Drawing saved to Gallery!", Toast.LENGTH_SHORT);
+				savedToast.show();
 			}
 			else{
-			    Toast unsavedToast = Toast.makeText(getApplicationContext(), 
-			        "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
-			    unsavedToast.show();
+				Toast unsavedToast = Toast.makeText(getApplicationContext(), 
+						"Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+				unsavedToast.show();
 			}
+			*/
 			drawView.destroyDrawingCache();
 		}
 
