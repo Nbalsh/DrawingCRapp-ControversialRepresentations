@@ -42,19 +42,21 @@
             android:orientation="horizontal"
             tools:ignore="UselessParent" >
 
-            <Button
+            <ImageButton
                 android:id="@+id/start_game"
                 style="?buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:src="@drawable/playbuttoncr"
                 android:text="Start" />
-            <Button
+            <ImageButton
                 android:id="@+id/past_games"
                 style="?buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:src="@drawable/gallerybuttoncr"
                 android:text="Past Games" />
             
             

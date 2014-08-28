@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
  */
 public class FullscreenActivity extends Activity {
 	// UI fields
-	Button mStart;
+	ImageButton mStart;
 	
 	// this is for the drawing
 
@@ -56,7 +56,7 @@ public class FullscreenActivity extends Activity {
 	 */
 	private SystemUiHider mSystemUiHider;
 
-	private Button mPastGames;
+	private ImageButton mPastGames;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class FullscreenActivity extends Activity {
 		
 		setContentView(R.layout.activity_fullscreen);
 		
-		mStart = (Button) findViewById(R.id.start_game);
+		mStart = (ImageButton) findViewById(R.id.start_game);
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -82,7 +82,7 @@ public class FullscreenActivity extends Activity {
 			}
 		});
 		
-		mPastGames = (Button) findViewById(R.id.past_games);
+		mPastGames = (ImageButton) findViewById(R.id.past_games);
 		mPastGames.setOnClickListener(new OnClickListener(){
 			
 			@Override
