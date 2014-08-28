@@ -80,7 +80,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_drawing=0x7f030000;
         public static final int activity_fullscreen=0x7f030001;
         public static final int activity_gallery=0x7f030002;
-        public static final int brush_chooser=0x7f030003;
+        public static final int activity_guessing=0x7f030003;
+        public static final int brush_chooser=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f070000;
