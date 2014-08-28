@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/playbuttoncr"
+                android:src="@drawable/play_button_selector"
                 android:text="Start" />
             <ImageButton
                 android:id="@+id/past_games"
@@ -56,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/gallerybuttoncr"
+                android:src="@drawable/gallery_button_selector"
                 android:text="Past Games" />
             
             
