@@ -7,11 +7,14 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.os.CountDownTimer;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
+
 import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,12 +37,13 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	private float smallBrush, mediumBrush, largeBrush;
 
 	private ImageButton eraseBtn, newBtn, saveBtn;
-
+	
+	private TextView tv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		setContentView(R.layout.activity_drawing);
 		drawView = (DrawingView)findViewById(R.id.drawing);
 		LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
@@ -61,8 +65,65 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 		saveBtn = (ImageButton)findViewById(R.id.save_btn);
 		saveBtn.setOnClickListener(this);
+		
+		tv = (TextView)findViewById(R.id.timer);
+
+        Timer counter = new Timer(46000,1000);
+
+        counter.start();
 
 	}
+	
+	public class Timer extends CountDownTimer{
+
+        public Timer(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onFinish() {
+        	tv.setText("Times Up!");
+        	
+        	drawView.setDrawingCacheEnabled(true);
+
+			File file = new File(DrawingActivity.this.getFilesDir(), "DrawingCRApp2");
+			if(!file.exists()){
+				file.mkdirs();
+				
+			}
+			//Toast.makeText(getApplicationContext(), "test2", Toast.LENGTH_SHORT).show();
+			File pictureFile = new File(file.getPath(), UUID.randomUUID().toString()+".png");
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(pictureFile);
+				boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
+				fos.flush();
+				fos.close();
+				
+				//trying crap from: http://developer.android.com/training/basics/data-storage/shared-preferences.html
+				
+				SharedPreferences sharedPref = DrawingActivity.this.getPreferences(Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPref.edit();
+				editor.putString(getString(R.string.saved_filed_name), pictureFile.getPath());
+				editor.commit();
+				
+				
+				Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {
+				e.printStackTrace();
+				Toast.makeText(getApplicationContext(), "file not created", Toast.LENGTH_SHORT).show();
+			}
+			drawView.destroyDrawingCache();
+			drawView.startNew();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            tv.setText("" + millisUntilFinished/1000);
+        }
+
+    }
 
 	public void paintClicked(View view){
 		if(view!=currPaint){
