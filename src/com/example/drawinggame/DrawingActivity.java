@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
@@ -244,7 +245,11 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			saveDialog.setMessage("Save drawing to device Gallery?");
 			saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int which){
-					//save drawing
+				//public void onClick(View v){
+					startGuessingActivity();
+					/**
+					 * BRANDON CHANGED THIS MICRO METHOD
+					 */
 				}
 			});
 			saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
@@ -311,7 +316,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	{
 		AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
 		saveDialog.setTitle("Exit Current Game");
-		saveDialog.setMessage("Exit Current Game Fo Reals?");
+		saveDialog.setMessage("Exit Current Game Fo Realz?");
 		saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int which){
 				DrawingActivity.this.finish();
@@ -325,4 +330,12 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		saveDialog.show();
 	}
 
+	
+	/**
+	 * BRANDON"S GUESSING ACTIVITY SHIT
+	 */
+	private void startGuessingActivity() {
+		Intent i = new Intent(this, GuessingActivity.class);
+		startActivity(i);
+	}
 }
