@@ -40,7 +40,7 @@ public class GuessingActivity extends Activity implements OnClickListener {
 			saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int which){
 					//public void onClick(View v){
-					//startDrawingActivity();
+					startDrawingActivity();
 					/**
 					 * BRANDON CHANGED THIS MICRO METHOD
 					 */
