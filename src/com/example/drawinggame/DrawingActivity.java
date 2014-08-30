@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,6 +41,8 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	private ImageButton eraseBtn, newBtn, saveBtn;
 	
 	private TextView tv;
+	
+	public TextView guessStringTV;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,13 @@ public class DrawingActivity extends Activity implements OnClickListener{
         Timer counter = new Timer(46000,1000);
 
         counter.start();
-
+        
+        // Brandon's Guessing shiet
+        guessStringTV = (TextView) findViewById(R.id.text_id);
+        
+        Intent intent = getIntent();
+		String guessStringS = intent.getStringExtra("guessString");
+		guessStringTV.setText(guessStringS);
 	}
 	
 	public class Timer extends CountDownTimer{
@@ -337,5 +346,6 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	private void startGuessingActivity() {
 		Intent i = new Intent(this, GuessingActivity.class);
 		startActivity(i);
+		this.finish();
 	}
 }

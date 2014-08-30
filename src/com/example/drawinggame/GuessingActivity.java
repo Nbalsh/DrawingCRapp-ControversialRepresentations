@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class GuessingActivity extends Activity implements OnClickListener {
 
-	ImageButton doneBtn;
+	private ImageButton doneBtn;
+	
+	public EditText guessStringET;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,9 @@ public class GuessingActivity extends Activity implements OnClickListener {
 
 		doneBtn = (ImageButton) findViewById(R.id.save_btn);
 		doneBtn.setOnClickListener(this);
-
+		
+		guessStringET = (EditText) findViewById(R.id.text);
+		
 	}
 
 
@@ -58,6 +63,8 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	
 	private void startDrawingActivity() {
 		Intent i = new Intent(this, DrawingActivity.class);
+		i.putExtra("guessString", guessStringET.getText().toString());
 		startActivity(i);
+		this.finish();
 	}
 }
