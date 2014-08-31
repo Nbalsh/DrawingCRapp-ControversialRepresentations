@@ -88,7 +88,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		SharedPreferences dataCount = getSharedPreferences("counterInt", 0);
 		int counterInt = dataCount.getInt("counterInt", 0);
 		//Toast.makeText(getApplicationContext(), "counter: " + counterInt, Toast.LENGTH_SHORT).show();
-		if(counterInt >= 3){ //CHANGE FOR THE COUNTER
+		if(counterInt >= 4){ //CHANGE FOR THE COUNTER
 			SharedPreferences dataCount2 = getSharedPreferences("counterInt", 0);
 			int counterInt2 = dataCount2.getInt("counterInt", 0);
 			counterInt2 = 0;
