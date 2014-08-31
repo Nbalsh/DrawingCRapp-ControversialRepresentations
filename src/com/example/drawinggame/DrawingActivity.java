@@ -44,7 +44,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 	public TextView guessStringTV;
 
-
+	Timer counter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 		tv = (TextView)findViewById(R.id.timer);
 
-		Timer counter = new Timer(46000,1000);
+		counter = new Timer(46000,1000);
 
 		counter.start();
 
@@ -96,6 +96,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			SharedPreferences.Editor editor = data.edit();
 			editor.putInt("counterInt", counterInt2);
 			editor.commit();
+			counter.cancel();
 			finish();}
 	}
 
@@ -108,9 +109,8 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		@Override
 		public void onFinish() {
 			tv.setText("Times Up!");
-
+			counter.cancel();
 			drawView.setDrawingCacheEnabled(true);
-
 			File file = new File(DrawingActivity.this.getFilesDir(), "DrawingCRApp2");
 			if(!file.exists()){
 				file.mkdirs();
@@ -271,6 +271,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int which){
 					//public void onClick(View v){
+					counter.cancel();
 					startGuessingActivity();
 					/**
 					 * BRANDON CHANGED THIS MICRO METHOD
