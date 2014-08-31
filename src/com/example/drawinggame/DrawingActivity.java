@@ -106,7 +106,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			
 			try {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
-				boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
+				//boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.flush();
 				fos.close();
 				
@@ -118,14 +118,15 @@ public class DrawingActivity extends Activity implements OnClickListener{
 				editor.commit();
 				
 				
-				Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
-				Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
 				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), "file not created", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), "file not created", Toast.LENGTH_SHORT).show();
 			}
-			drawView.destroyDrawingCache();
-			drawView.startNew();
+			startGuessingActivity();
+			//drawView.destroyDrawingCache();
+			//drawView.startNew();
         }
 
         @Override
@@ -292,8 +293,8 @@ public class DrawingActivity extends Activity implements OnClickListener{
 				editor.commit();
 				
 				
-				Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
-				Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(getApplicationContext(), "file not created", Toast.LENGTH_SHORT).show();

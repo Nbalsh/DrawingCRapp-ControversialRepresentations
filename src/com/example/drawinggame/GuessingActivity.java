@@ -23,7 +23,7 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	public EditText guessStringET;
 	
 	private static final boolean AUTO_HIDE = false;
-	private static final int AUTO_HIDE_DELAY_MILLIS = 5000;
+	private static final int AUTO_HIDE_DELAY_MILLIS = 2500;
 	private static final boolean TOGGLE_ON_CLICK = true;
 	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
 	private SystemUiHider mSystemUiHider;
