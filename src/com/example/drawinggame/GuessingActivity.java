@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,8 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
 	private SystemUiHider mSystemUiHider;
 	
+	public static int counterInt = 0;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,9 @@ public class GuessingActivity extends Activity implements OnClickListener {
 		guessStringET = (EditText) findViewById(R.id.text);
 		
 		
-		
 		final View controlsView = findViewById(R.id.guessscreen_content_controls);
 		final View contentView = findViewById(R.id.guessscreen_content);
+		
 		
 		// Set up an instance of SystemUiHider to control the system UI for
 				// this activity.
@@ -176,6 +179,13 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	
 	
 	private void startDrawingActivity() {
+		SharedPreferences dataCount = getSharedPreferences("counterInt", 0);
+		int counterInt = dataCount.getInt("counterInt", 0);
+		counterInt += 1;
+		SharedPreferences data = getSharedPreferences("counterInt", 0);
+		SharedPreferences.Editor editor = data.edit();
+		editor.putInt("counterInt", counterInt);
+		editor.commit();
 		Intent i = new Intent(this, DrawingActivity.class);
 		i.putExtra("guessString", guessStringET.getText().toString());
 		startActivity(i);

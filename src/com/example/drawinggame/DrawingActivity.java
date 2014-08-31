@@ -39,15 +39,17 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	private float smallBrush, mediumBrush, largeBrush;
 
 	private ImageButton eraseBtn, newBtn, saveBtn;
-	
+
 	private TextView tv;
-	
+
 	public TextView guessStringTV;
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_drawing);
 		drawView = (DrawingView)findViewById(R.id.drawing);
 		LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
@@ -69,55 +71,68 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 		saveBtn = (ImageButton)findViewById(R.id.save_btn);
 		saveBtn.setOnClickListener(this);
-		
+
 		tv = (TextView)findViewById(R.id.timer);
 
-        Timer counter = new Timer(46000,1000);
+		Timer counter = new Timer(46000,1000);
 
-        counter.start();
-        
-        // Brandon's Guessing shiet
-        guessStringTV = (TextView) findViewById(R.id.text_id);
-        
-        Intent intent = getIntent();
+		counter.start();
+
+		// Brandon's Guessing shiet
+		guessStringTV = (TextView) findViewById(R.id.text_id);
+
+		Intent intent = getIntent();
 		String guessStringS = intent.getStringExtra("guessString");
 		guessStringTV.setText(guessStringS);
+
+		SharedPreferences dataCount = getSharedPreferences("counterInt", 0);
+		int counterInt = dataCount.getInt("counterInt", 0);
+		//Toast.makeText(getApplicationContext(), "counter: " + counterInt, Toast.LENGTH_SHORT).show();
+		if(counterInt >= 3){ //CHANGE FOR THE COUNTER
+			SharedPreferences dataCount2 = getSharedPreferences("counterInt", 0);
+			int counterInt2 = dataCount2.getInt("counterInt", 0);
+			counterInt2 = 0;
+			SharedPreferences data = getSharedPreferences("counterInt", 0);
+			SharedPreferences.Editor editor = data.edit();
+			editor.putInt("counterInt", counterInt2);
+			editor.commit();
+			finish();}
 	}
-	
+
 	public class Timer extends CountDownTimer{
 
-        public Timer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
+		public Timer(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+		}
 
-        @Override
-        public void onFinish() {
-        	tv.setText("Times Up!");
-        	
-        	drawView.setDrawingCacheEnabled(true);
+		@Override
+		public void onFinish() {
+			tv.setText("Times Up!");
+
+			drawView.setDrawingCacheEnabled(true);
 
 			File file = new File(DrawingActivity.this.getFilesDir(), "DrawingCRApp2");
 			if(!file.exists()){
 				file.mkdirs();
-				
+
 			}
 			//Toast.makeText(getApplicationContext(), "test2", Toast.LENGTH_SHORT).show();
 			File pictureFile = new File(file.getPath(), UUID.randomUUID().toString()+".png");
-			
+
 			try {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				//boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.flush();
 				fos.close();
-				
+
 				//trying crap from: http://developer.android.com/training/basics/data-storage/shared-preferences.html
-				
+
 				SharedPreferences sharedPref = DrawingActivity.this.getPreferences(Context.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPref.edit();
 				editor.putString(getString(R.string.saved_filed_name), pictureFile.getPath());
 				editor.commit();
-				
-				
+
+
 				//Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
 				//Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
@@ -127,14 +142,14 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			startGuessingActivity();
 			//drawView.destroyDrawingCache();
 			//drawView.startNew();
-        }
+		}
 
-        @Override
-        public void onTick(long millisUntilFinished) {
-            tv.setText("" + millisUntilFinished/1000);
-        }
+		@Override
+		public void onTick(long millisUntilFinished) {
+			tv.setText("" + millisUntilFinished/1000);
+		}
 
-    }
+	}
 
 	public void paintClicked(View view){
 		if(view!=currPaint){
@@ -255,7 +270,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			saveDialog.setMessage("Save drawing to device Gallery?");
 			saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int which){
-				//public void onClick(View v){
+					//public void onClick(View v){
 					startGuessingActivity();
 					/**
 					 * BRANDON CHANGED THIS MICRO METHOD
@@ -274,32 +289,32 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			File file = new File(DrawingActivity.this.getFilesDir(), "DrawingCRApp2");
 			if(!file.exists()){
 				file.mkdirs();
-				
+
 			}
 			//Toast.makeText(getApplicationContext(), "test2", Toast.LENGTH_SHORT).show();
 			File pictureFile = new File(file.getPath(), UUID.randomUUID().toString()+".png");
-			
+
 			try {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				boolean successfullyCompressed = drawView.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.flush();
 				fos.close();
-				
+
 				//trying crap from: http://developer.android.com/training/basics/data-storage/shared-preferences.html
-				
+
 				SharedPreferences sharedPref = DrawingActivity.this.getPreferences(Context.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPref.edit();
 				editor.putString(getString(R.string.saved_filed_name), pictureFile.getPath());
 				editor.commit();
-				
-				
+
+
 				//Toast.makeText(getApplicationContext(), "file compressed: " + successfullyCompressed, Toast.LENGTH_SHORT).show();
 				//Toast.makeText(getApplicationContext(), pictureFile.getPath(), Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(getApplicationContext(), "file not created", Toast.LENGTH_SHORT).show();
 			}
-			
+
 
 
 			/*String imgSaved = MediaStore.Images.Media.insertImage(
@@ -315,12 +330,12 @@ public class DrawingActivity extends Activity implements OnClickListener{
 						"Oops! Image could not be saved.", Toast.LENGTH_SHORT);
 				unsavedToast.show();
 			}
-			*/
+			 */
 			drawView.destroyDrawingCache();
 		}
 
 	}
-	
+
 	@Override
 	public void onBackPressed()
 	{
@@ -340,7 +355,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		saveDialog.show();
 	}
 
-	
+
 	/**
 	 * BRANDON"S GUESSING ACTIVITY SHIT
 	 */
