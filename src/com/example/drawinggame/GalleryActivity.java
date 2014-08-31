@@ -13,11 +13,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 @SuppressWarnings("deprecation")
@@ -33,6 +36,8 @@ public class GalleryActivity extends Activity {
 	private Gallery picGallery;
 	//image view for larger display
 	private ImageView picView;
+	
+	private Button mPlay;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,8 @@ public class GalleryActivity extends Activity {
                 startActivityForResult(Intent.createChooser(pickIntent, "Select Picture"), PICKER);
         		return true;
         	}
+        	
+        	
         });
         
         //set the click listener for each item in the thumbnail gallery
@@ -76,6 +83,15 @@ public class GalleryActivity extends Activity {
                 picView.setImageBitmap(imgAdapt.getPic(position));
             }
         });
+        
+        mPlay = (Button) findViewById(R.id.play);
+		mPlay.setOnClickListener(new OnClickListener(){
+			
+			@Override
+			public void onClick(View v2) {
+				startDrawingActivity();
+			}
+		});
     }
     
     public class PicAdapter extends BaseAdapter {
@@ -258,4 +274,9 @@ public class GalleryActivity extends Activity {
     	//superclass method
     	super.onActivityResult(requestCode, resultCode, data);
     }
+    
+    private void startDrawingActivity() {
+		Intent i = new Intent(this, DrawingActivity.class);
+		startActivity(i);
+	}
 }

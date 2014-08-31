@@ -89,6 +89,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		int counterInt = dataCount.getInt("counterInt", 0);
 		//Toast.makeText(getApplicationContext(), "counter: " + counterInt, Toast.LENGTH_SHORT).show();
 		if(counterInt >= 4){ //CHANGE FOR THE COUNTER
+			startGalleryActivity();
 			SharedPreferences dataCount2 = getSharedPreferences("counterInt", 0);
 			int counterInt2 = dataCount2.getInt("counterInt", 0);
 			counterInt2 = 0;
@@ -98,6 +99,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			editor.commit();
 			counter.cancel();
 			finish();}
+			
 	}
 
 	public class Timer extends CountDownTimer{
@@ -362,6 +364,12 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	 */
 	private void startGuessingActivity() {
 		Intent i = new Intent(this, GuessingActivity.class);
+		startActivity(i);
+		this.finish();
+	}
+	
+	private void startGalleryActivity() {
+		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);
 		this.finish();
 	}
