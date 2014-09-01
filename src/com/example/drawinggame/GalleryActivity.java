@@ -278,5 +278,6 @@ public class GalleryActivity extends Activity {
     private void startDrawingActivity() {
 		Intent i = new Intent(this, DrawingActivity.class);
 		startActivity(i);
+		this.finish();
 	}
 }

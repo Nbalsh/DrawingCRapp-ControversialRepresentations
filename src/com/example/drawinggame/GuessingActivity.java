@@ -168,6 +168,25 @@ public class GuessingActivity extends Activity implements OnClickListener {
 		}
 	};
 
+	@Override
+	public void onBackPressed()
+	{
+		AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
+		saveDialog.setTitle("Exit Current Game");
+		saveDialog.setMessage("Exit Current Game Fo Realz?");
+		saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				GuessingActivity.this.finish();
+			}
+		});
+		saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				dialog.cancel();
+			}
+		});
+		saveDialog.show();
+	}
+	
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
 	 * previously scheduled calls.
