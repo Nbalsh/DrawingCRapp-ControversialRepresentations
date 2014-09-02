@@ -13,11 +13,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 public class WordBankActivity extends Activity implements OnClickListener{
 	
-	public static ArrayList<String> wordBank;
+	public static ArrayList<String> wordBank = new ArrayList<String>();
 	
 	private EditText editText;
 	
@@ -64,8 +65,9 @@ public class WordBankActivity extends Activity implements OnClickListener{
 			});
 			saveDialog.show();
 		}
-		else if(view.getId()==R.id.textWordBank){
+		else if(view.getId()==R.id.word_bank){
 			wordBank.add(editText.getText().toString());
+			Toast.makeText(getApplicationContext(), "WordBank: " + wordBank.get(0), Toast.LENGTH_SHORT).show();
 			editText.setText(" ");
 		}
 	}
