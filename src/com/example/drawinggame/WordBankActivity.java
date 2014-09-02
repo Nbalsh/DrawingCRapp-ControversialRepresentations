@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -20,18 +21,21 @@ public class WordBankActivity extends Activity implements OnClickListener{
 	
 	private EditText editText;
 	
-	private ImageButton doneBtn, saveWordBtn;
+	private Button saveWordBtn;
+	
+	private ImageButton doneBtn;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_word_bank);
 		
 		editText = (EditText) findViewById(R.id.textWordBank);
 		
 		doneBtn = (ImageButton) findViewById(R.id.save_btn);
 		doneBtn.setOnClickListener(this);
 		
-		saveWordBtn = (ImageButton) findViewById(R.id.word_bank);
+		saveWordBtn = (Button) findViewById(R.id.word_bank);
 		saveWordBtn.setOnClickListener(this);
 		
 	}
@@ -43,7 +47,7 @@ public class WordBankActivity extends Activity implements OnClickListener{
 			//save drawing
 			AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
 			saveDialog.setTitle("StartGame?");
-			saveDialog.setMessage("Done? Fo Realz?");
+			saveDialog.setMessage("Start Game? Fo Realz?");
 			saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int which){
 					//public void onClick(View v){
