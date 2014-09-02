@@ -106,7 +106,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		
 		lofWords = WordBankActivity.tinyDB.getList("wordDB");
 
-		if(counterInt == 0 && lofWords != null){
+		if(counterInt == 0 && lofWords.size() > 0){
 			random = new Random();
 			int lofWArray = random.nextInt(lofWords.size());
 			String startWord = lofWords.get(lofWArray);
@@ -114,7 +114,9 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			lofWords.remove(lofWArray);
 			WordBankActivity.tinyDB.putList("wordDB", lofWords);
 		}
-		else guessStringTV.setText(guessStringS);
+		else if(guessStringS != null)
+				guessStringTV.setText(guessStringS);
+		else guessStringTV.setText("Raptor fighting a man on a spaceship");
 
 	}
 
