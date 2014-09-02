@@ -62,19 +62,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gallery=0x7f09000c;
         public static final int guessscreen_content=0x7f09000f;
         public static final int guessscreen_content_controls=0x7f090010;
-        public static final int large_brush=0x7f090014;
-        public static final int medium_brush=0x7f090013;
+        public static final int large_brush=0x7f090016;
+        public static final int medium_brush=0x7f090015;
         public static final int new_btn=0x7f090000;
         public static final int paint_colors=0x7f090007;
         public static final int past_games=0x7f09000b;
         public static final int picture=0x7f09000e;
         public static final int play=0x7f09000d;
         public static final int save_btn=0x7f090003;
-        public static final int small_brush=0x7f090012;
+        public static final int small_brush=0x7f090014;
         public static final int start_game=0x7f09000a;
         public static final int text=0x7f090011;
+        public static final int textWordBank=0x7f090012;
         public static final int text_id=0x7f090005;
         public static final int timer=0x7f090004;
+        public static final int word_bank=0x7f090013;
     }
     public static final class integer {
         public static final int large_size=0x7f060002;
@@ -86,7 +88,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_fullscreen=0x7f030001;
         public static final int activity_gallery=0x7f030002;
         public static final int activity_guessing=0x7f030003;
-        public static final int brush_chooser=0x7f030004;
+        public static final int activity_word_bank=0x7f030004;
+        public static final int brush_chooser=0x7f030005;
     }
     public static final class string {
         public static final int app_name=0x7f070000;
@@ -94,17 +97,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int dummy_button=0x7f070001;
         public static final int dummy_content=0x7f070002;
         public static final int erase=0x7f070005;
-        public static final int lrg=0x7f07000a;
-        public static final int med=0x7f070009;
+        public static final int lrg=0x7f07000b;
+        public static final int med=0x7f07000a;
         public static final int paint=0x7f070006;
-        public static final int picture=0x7f07000c;
-        public static final int play=0x7f07000f;
+        public static final int picture=0x7f07000d;
+        public static final int play=0x7f070010;
         public static final int save=0x7f070007;
-        public static final int saved_filed_name=0x7f07000b;
-        public static final int select_intro=0x7f07000d;
-        public static final int show_intro=0x7f07000e;
-        public static final int sml=0x7f070008;
+        public static final int saved_filed_name=0x7f07000c;
+        public static final int select_intro=0x7f07000e;
+        public static final int show_intro=0x7f07000f;
+        public static final int sml=0x7f070009;
         public static final int start_new=0x7f070003;
+        public static final int word_bank=0x7f070008;
     }
     public static final class style {
         /** 
