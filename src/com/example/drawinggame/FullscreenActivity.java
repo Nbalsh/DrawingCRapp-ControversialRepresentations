@@ -80,7 +80,7 @@ public class FullscreenActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				startDrawingActivity();
+				startWordBankActivity(); //Changed to WordBankActivity
 			}
 		});
 		
@@ -215,6 +215,11 @@ public class FullscreenActivity extends Activity {
 		Intent i2 = new Intent(this, GalleryActivity.class);
 		startActivity(i2);
 		
+	}
+	
+	private void startWordBankActivity() {
+		Intent i = new Intent(this, WordBankActivity.class);
+		startActivity(i);
 	}
 
 }

@@ -37,6 +37,8 @@
         
         <activity android:name="com.example.drawinggame.GuessingActivity"
             ></activity>
+        <activity android:name="com.example.drawinggame.WordBankActivity"
+            ></activity>
                 </application>
 
 </manifest>
