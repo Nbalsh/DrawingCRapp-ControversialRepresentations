@@ -14,6 +14,7 @@ import android.os.CountDownTimer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 import android.provider.MediaStore;
@@ -45,6 +46,10 @@ public class DrawingActivity extends Activity implements OnClickListener{
 	public TextView guessStringTV;
 
 	Timer counter;
+
+	private ArrayList<String> lofWords;
+
+	private Random random; // random.nextInt(int n) inclusive 0 to exclusive n
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +83,6 @@ public class DrawingActivity extends Activity implements OnClickListener{
 
 		counter.start();
 
-		// Brandon's Guessing shiet
-		guessStringTV = (TextView) findViewById(R.id.text_id);
-
-		Intent intent = getIntent();
-		String guessStringS = intent.getStringExtra("guessString");
-		guessStringTV.setText(guessStringS);
-
 		SharedPreferences dataCount = getSharedPreferences("counterInt", 0);
 		int counterInt = dataCount.getInt("counterInt", 0);
 		//Toast.makeText(getApplicationContext(), "counter: " + counterInt, Toast.LENGTH_SHORT).show();
@@ -99,7 +97,25 @@ public class DrawingActivity extends Activity implements OnClickListener{
 			editor.commit();
 			counter.cancel();
 			finish();}
-			
+
+		// Brandon's Guessing shiet
+		guessStringTV = (TextView) findViewById(R.id.text_id);
+
+		Intent intent = getIntent();
+		String guessStringS = intent.getStringExtra("guessString");
+		
+		lofWords = WordBankActivity.tinyDB.getList("wordDB");
+
+		if(counterInt == 0 && lofWords != null){
+			random = new Random();
+			int lofWArray = random.nextInt(lofWords.size());
+			String startWord = lofWords.get(lofWArray);
+			guessStringTV.setText(startWord);
+			lofWords.remove(lofWArray);
+			WordBankActivity.tinyDB.putList("wordDB", lofWords);
+		}
+		else guessStringTV.setText(guessStringS);
+
 	}
 
 	public class Timer extends CountDownTimer{
@@ -367,7 +383,7 @@ public class DrawingActivity extends Activity implements OnClickListener{
 		startActivity(i);
 		this.finish();
 	}
-	
+
 	private void startGalleryActivity() {
 		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);

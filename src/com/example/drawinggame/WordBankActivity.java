@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class WordBankActivity extends Activity implements OnClickListener{
 	
-	public static ArrayList<String> wordBank = new ArrayList<String>();
+	public static ArrayList<String> wordBank;
 	
 	private EditText editText;
 	
@@ -26,18 +26,24 @@ public class WordBankActivity extends Activity implements OnClickListener{
 	
 	private ImageButton doneBtn;
 	
+	
+	public static TinyDB tinyDB;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_word_bank);
 		
 		editText = (EditText) findViewById(R.id.textWordBank);
+		wordBank = new ArrayList<String>();
 		
 		doneBtn = (ImageButton) findViewById(R.id.save_btn);
 		doneBtn.setOnClickListener(this);
 		
 		saveWordBtn = (Button) findViewById(R.id.word_bank);
 		saveWordBtn.setOnClickListener(this);
+		
+		tinyDB = new TinyDB(this.getApplicationContext());
 		
 	}
 	
@@ -67,7 +73,7 @@ public class WordBankActivity extends Activity implements OnClickListener{
 		}
 		else if(view.getId()==R.id.word_bank){
 			wordBank.add(editText.getText().toString());
-			Toast.makeText(getApplicationContext(), "WordBank: " + wordBank.get(0), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "WordBank: " + wordBank.get(0), Toast.LENGTH_SHORT).show();
 			editText.setText(" ");
 		}
 	}
@@ -75,6 +81,7 @@ public class WordBankActivity extends Activity implements OnClickListener{
 	
 	private void startDrawingActivity() {
 		Intent i = new Intent(this, DrawingActivity.class);
+		tinyDB.putList("wordDB", wordBank);
 		startActivity(i);
 		this.finish();
 	}
