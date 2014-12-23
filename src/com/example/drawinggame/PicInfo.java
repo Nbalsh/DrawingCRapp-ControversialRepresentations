@@ -3,10 +3,10 @@ package com.example.drawinggame;
 public class PicInfo {
 	private static PicInfo instance = null;
 	private String pathToImages;
-	private String image0;
-	private String image1;
-	private String image2;
-	private String image3;
+	private long image0;
+	private long image1;
+	private long image2;
+	private long image3;
 	private String guess0;
 	private String guess1;
 	private String guess2;
@@ -22,8 +22,7 @@ public class PicInfo {
 		return instance;
 	}
 	
-	public void setImage(long path2, int num){
-		String path = String.valueOf(path2)+".jpg";
+	public void setImage(long path, int num){
 		if(num == 0) image0 = path;
 		else if(num == 1) image1 = path;
 		else if(num == 2) image2 = path;
@@ -37,12 +36,12 @@ public class PicInfo {
 		else if(num == 3) guess3 = guess;
 	}
 	
-	public String getImage(int num){
+	public long getImage(int num){
 		if(num == 0) return image0;
 		else if (num == 1) return image1;
 		else if (num == 2) return image2;
 		else if (num == 3) return image3;
-		return null;
+		return 0;
 	}
 	public String getGuess(int num){
 		if(num == 0) return guess0;

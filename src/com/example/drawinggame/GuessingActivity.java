@@ -263,6 +263,7 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	private void loadImageFromStorage(String path, long picName){
 
 	    try {
+	    	System.out.println("Path: "+path+" picName: "+picName);
 	        File f=new File(path, picName + ".jpg");
 	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
 	            ImageView img=(ImageView)findViewById(R.id.imageView1);
