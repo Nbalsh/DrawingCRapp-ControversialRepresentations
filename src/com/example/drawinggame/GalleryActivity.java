@@ -39,6 +39,8 @@ public class GalleryActivity extends Activity {
 	
 	private Button mPlay;
 	
+	private PicInfo pIInstance = null;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	
@@ -57,6 +59,14 @@ public class GalleryActivity extends Activity {
         //set the gallery adapter
         picGallery.setAdapter(imgAdapt);
         
+        pIInstance = PicInfo.getInstance();
+        System.out.println("Dir: " + pIInstance.getPath());
+        for(int i = 0; i < 4; i++){
+        	System.out.println("Path: "+pIInstance.getImage(i));
+        	System.out.println("Guess: "+pIInstance.getGuess(i));
+        }
+        
+        
         //set long click listener for each gallery thumbnail item
         picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
         	//handle long clicks
@@ -74,6 +84,12 @@ public class GalleryActivity extends Activity {
         	
         	
         });
+        
+  
+		
+        
+        
+        
         
         //set the click listener for each item in the thumbnail gallery
         picGallery.setOnItemClickListener(new OnItemClickListener() {

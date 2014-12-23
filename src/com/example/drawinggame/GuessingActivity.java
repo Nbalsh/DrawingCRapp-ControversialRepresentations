@@ -1,13 +1,22 @@
 package com.example.drawinggame;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import com.example.drawinggame.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.WallpaperManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +25,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class GuessingActivity extends Activity implements OnClickListener {
 
@@ -30,6 +41,9 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	private SystemUiHider mSystemUiHider;
 	
 	public static int counterInt = 0;
+	private Bitmap backgroundImg;
+	private Canvas canvas;
+	public static Bitmap bitMap;
 	
 	
 	@Override
@@ -52,6 +66,38 @@ public class GuessingActivity extends Activity implements OnClickListener {
 		final View controlsView = findViewById(R.id.guessscreen_content_controls);
 		final View contentView = findViewById(R.id.guessscreen_content);
 		
+		
+		//backgroundImg = WordBankActivity.tinyDB.getImage("backgroundImg");
+		//Toast.makeText(getApplicationContext(), "backgroundImg" + backgroundImg.getByteCount(), Toast.LENGTH_SHORT);
+		// backgroundIMG is null; 
+		//canvas = new Canvas(backgroundImg);
+		//canvas = new Canvas(bitMap);
+		
+		
+		
+		
+		
+		//FileInputStream fin = null;
+		Intent intent = getIntent();
+		String pathImage = intent.getStringExtra("imagePath");
+		long picName = intent.getLongExtra("picName", 0);
+		loadImageFromStorage(pathImage, picName);
+
+		
+	   /* try {
+	        fin = openFileInput("myImage.jpg");
+	        if(fin !=null && ((CharSequence) fin).length() > 0) {
+	            Bitmap bmp = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath() + "/myImage.jpg");; 
+	            img.setImageBitmap(bmp);
+	         } else {
+	            //input stream has not much data to convert into  Bitmap
+	        	 System.out.println("Error mutha");
+	          }
+	    } catch (FileNotFoundException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+		*/
 		
 		// Set up an instance of SystemUiHider to control the system UI for
 				// this activity.
@@ -200,14 +246,32 @@ public class GuessingActivity extends Activity implements OnClickListener {
 	private void startDrawingActivity() {
 		SharedPreferences dataCount = getSharedPreferences("counterInt", 0);
 		int counterInt = dataCount.getInt("counterInt", 0);
+		
+		Intent i = new Intent(this, DrawingActivity.class);
+		i.putExtra("guessString", guessStringET.getText().toString());
+		
 		counterInt += 1;
 		SharedPreferences data = getSharedPreferences("counterInt", 0);
 		SharedPreferences.Editor editor = data.edit();
 		editor.putInt("counterInt", counterInt);
 		editor.commit();
-		Intent i = new Intent(this, DrawingActivity.class);
-		i.putExtra("guessString", guessStringET.getText().toString());
+		
 		startActivity(i);
 		this.finish();
+	}
+	
+	private void loadImageFromStorage(String path, long picName){
+
+	    try {
+	        File f=new File(path, picName + ".jpg");
+	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+	            ImageView img=(ImageView)findViewById(R.id.imageView1);
+	        img.setImageBitmap(b);
+	        //System.out.println("image: "+ img.getDrawingCacheBackgroundColor());
+	    } 
+	    catch (FileNotFoundException e) 
+	    {
+	        e.printStackTrace();
+	    }
 	}
 }
